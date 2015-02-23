@@ -15,7 +15,9 @@
 class Classify {
 
 	typedef std::map< int, int > CatsHits;
-
+	
+	std::map<int, float> m_cats_weigths;
+	
 	std::map<int, int> m_cats_powers;
 	hiaux::hashtable<std::string, float> m_idfs;
 	hiaux::hashtable<std::string, CatsHits> m_term_cats_hits;
