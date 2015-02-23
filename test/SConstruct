@@ -28,7 +28,7 @@ b.addPath("/usr/local/include/")
 #b.connectLib(hicore_path+"thirdparty/http-parser/")
 
 #b.addCCFlags(["-g3"])
-b.addLinkFlags(["-L/usr/local/lib/"])
+b.addLinkFlags(["-L/usr/local/lib/", "-lmongoclient", "-lboost_system"])
 
 b.addCppGlob("*.cpp")
 
