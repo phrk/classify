@@ -136,48 +136,31 @@ int Classify::getCategory (const std::string &_text) {
 				auto token_idf_it = m_idfs.find(tokens[i]);
 				
 				if (token_idf_it == m_idfs.end()) {
-					
-					//std::cout << "no such token: " << tokens[i] << std::endl; 
 					continue;
 				}
 				
-				//std::cout << "token idf: " << tokens[i]  << " " << token_idf_it->second << std::endl;
-				
 				if (token_idf_it->second < 0)
 					continue;
-				
-				
+								
 				float idf = token_idf_it->second;
 				
 				auto token_freq_it = m_term_cats_hits.find( tokens[i] );
 				if (token_freq_it == m_term_cats_hits.end()) {
-					//std::cout << "no token_freq_it for " << tokens[i] << std::endl;
 					continue;
 				}
 				
 				auto token_cat_hits_it = token_freq_it->second.find( category );
 				if (token_cat_hits_it == token_freq_it->second.end()) {
-					
-					//std::cout << "no token_cat_hits_it for " << tokens[i] << " cat:" << category << std::endl; 
-					
 					continue;
 				}
-				
-				//std::cout << "got token_cat_hits_it " << tokens[i] << " cat:" << category << std::endl;
-				
+
 				float tf = token_cat_hits_it->second;
 				float k1 = 2.0f;
 				float b = 0.75f;
 				
 				float cat_length = 1.0f;
 				float avgcl = 1.0f;
-				
-				//std::cout << tokens[i] << " : " << category << " tf: " << tf << " idf: " << idf << std::endl;
-				
 				float cat_weight_add = idf * tf * ( k1 + 1 ) / ( tf + k1 * (1 - b + b * cat_length / avgcl ) );
-				
-				//std::cout << "cat_weight_add: " << cat_weight_add << std::endl;
-				
 				cat_weight += cat_weight_add;
 			}
 		
@@ -192,9 +175,7 @@ int Classify::getCategory (const std::string &_text) {
 	int winner_cat = 0;
 	
 	while (it != end) {
-		
-		//std::cout << it->first << " / " << it->second << std::endl;
-		
+
 		if (it->second > winner_w) {
 			
 			winner_w = it->second;
