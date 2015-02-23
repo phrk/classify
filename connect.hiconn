@@ -1,0 +1,14 @@
+{
+
+"_NAME" : "classify",
+
+"_CPPFILES" : [ { "type": "Glob", "mask": "*.cpp" },
+	 			{ "type": "Glob", "mask": "*.cc" }],
+
+"_LINKFLAGS": [  ],
+
+"_DEPS" : [ "../hiaux/strings/",
+	 		"../hiaux/common/",
+			"../hiaux/network/",
+			"../hiaux/thirdparty/url-parser/"]
+}

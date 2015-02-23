@@ -1,0 +1,35 @@
+import sys
+sys.path.insert(0, '../../hiaux/hibuilder/')
+
+from hibuilder import HiBuilder
+
+env = Environment()
+
+b = HiBuilder("classify_tests", "clang++")
+
+hicore_path = "../../"
+hiaux_path = "../../"
+
+b.addPath(hicore_path)
+b.addPath(hiaux_path)
+b.addPath("../")
+b.addPath("./")
+
+b.connectLib("../")
+
+#b.connectLib("../HttpServer/")
+#b.addPath("../HttpServer")
+
+
+#b.connectLib("../../threads/")
+
+b.addPath("/usr/local/include/")
+
+#b.connectLib(hicore_path+"thirdparty/http-parser/")
+
+#b.addCCFlags(["-g3"])
+b.addLinkFlags(["-L/usr/local/lib/"])
+
+b.addCppGlob("*.cpp")
+
+b.build(Program)
