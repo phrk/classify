@@ -12,6 +12,8 @@
 
 #include "hiaux/strings/string_utils.h"
 
+#include <boost/shared_ptr.hpp>
+
 class Classify {
 
 	typedef std::map< int, int > CatsHits;
@@ -33,5 +35,7 @@ public:
 	int getCategory (const std::string &_text);
 	
 };
+
+typedef boost::shared_ptr<Classify> ClassifyPtr;
 
 #endif

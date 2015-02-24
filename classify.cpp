@@ -94,6 +94,8 @@ Classify::~Classify() {
 	
 }
 
+
+// bm25
 int Classify::getCategory (const std::string &_text) {
 	
 	std::vector<std::string> tokens;
@@ -119,8 +121,6 @@ int Classify::getCategory (const std::string &_text) {
 	splitUtf8(_text, delims, tokens);
 	
 	std::map<int, float> cats_weigths = m_cats_weigths;
-	
-	//std::cout << "cats_weigths: " << cats_weigths.size() << std::endl;
 	
 	auto cit = cats_weigths.begin();
 	auto cend = cats_weigths.end();
