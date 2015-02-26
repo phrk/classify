@@ -80,8 +80,8 @@ Classify::Classify(const std::string &_cats_powers_file,
 	
 	cats_nhitsf.close();
 	
-	auto cit = m_cats_powers.begin();
-	auto cend = m_cats_powers.end();
+	std::map<int, int>::iterator cit = m_cats_powers.begin();
+	std::map<int, int>::iterator cend = m_cats_powers.end();
 	
 	while (cit != cend) {
 		
@@ -122,8 +122,8 @@ int Classify::getCategory (const std::string &_text) {
 	
 	std::map<int, float> cats_weigths = m_cats_weigths;
 	
-	auto cit = cats_weigths.begin();
-	auto cend = cats_weigths.end();
+	std::map<int, float>::iterator cit = cats_weigths.begin();
+	std::map<int, float>::iterator cend = cats_weigths.end();
 	
 	while (cit != cend) {
 		
@@ -133,7 +133,7 @@ int Classify::getCategory (const std::string &_text) {
 		for (int i = 0; i<tokens.size(); i++)
 			if (tokens[i].size() > 3) {
 						
-				auto token_idf_it = m_idfs.find(tokens[i]);
+				hiaux::hashtable<std::string, float>::iterator token_idf_it = m_idfs.find(tokens[i]);
 				
 				if (token_idf_it == m_idfs.end()) {
 					continue;
@@ -144,12 +144,12 @@ int Classify::getCategory (const std::string &_text) {
 								
 				float idf = token_idf_it->second;
 				
-				auto token_freq_it = m_term_cats_hits.find( tokens[i] );
+				hiaux::hashtable<std::string, CatsHits>::iterator token_freq_it = m_term_cats_hits.find( tokens[i] );
 				if (token_freq_it == m_term_cats_hits.end()) {
 					continue;
 				}
 				
-				auto token_cat_hits_it = token_freq_it->second.find( category );
+				CatsHits::iterator token_cat_hits_it = token_freq_it->second.find( category );
 				if (token_cat_hits_it == token_freq_it->second.end()) {
 					continue;
 				}
@@ -168,8 +168,8 @@ int Classify::getCategory (const std::string &_text) {
 		cit++;
 	}
 	
-	auto it = cats_weigths.begin();
-	auto end = cats_weigths.end();
+	std::map<int, float>::iterator it = cats_weigths.begin();
+	std::map<int, float>::iterator end = cats_weigths.end();
 	
 	float winner_w = 0;
 	int winner_cat = 0;
